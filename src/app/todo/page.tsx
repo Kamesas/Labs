@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { tTodo } from "@/api/todo.types";
 import { TodoForm } from "@/components/todo/TodoForm";
+import { TodoList } from "@/components/todo/TodoList";
 
 export default function Todo() {
   const [todos, setTodos] = useState<tTodo[] | null>(null);
@@ -18,10 +19,7 @@ export default function Todo() {
       <h1>Todo</h1>
 
       <TodoForm updateTodoList={updateTodoList} />
-
-      {todos?.map((todo) => {
-        return <div key={todo?.id}>{todo?.description} </div>;
-      })}
+      {Array.isArray(todos) && !!todos?.length && <TodoList todos={todos} />}
     </div>
   );
 }
