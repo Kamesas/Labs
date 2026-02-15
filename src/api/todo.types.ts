@@ -1,4 +1,1 @@
-export type tTodo = {
-  id: string;
-  description: string;
-};
+export type tTodo = { id: string; description: string };

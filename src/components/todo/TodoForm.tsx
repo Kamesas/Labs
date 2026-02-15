@@ -20,7 +20,7 @@ export const TodoForm = ({ updateTodoList }: tProps) => {
     });
   };
 
-  const updateTodos = (e: React.SubmitEvent) => {
+  const addNewTodo = (e: React.SubmitEvent) => {
     e.preventDefault();
 
     if (!todo?.description) return;
@@ -35,7 +35,7 @@ export const TodoForm = ({ updateTodoList }: tProps) => {
   };
 
   return (
-    <form onSubmit={updateTodos}>
+    <form onSubmit={addNewTodo}>
       <input
         name="todo-description"
         placeholder="Write todo"
