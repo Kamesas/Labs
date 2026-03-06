@@ -1,3 +1,6 @@
+// 1. npm install -D prettier prettier-plugin-tailwindcss
+// 2. Add the prettier.config.js with the plugin
+
 export default function Tailwind() {
   return (
     <main>
@@ -14,6 +17,12 @@ export default function Tailwind() {
         <p className="text-sm italic tracking-wider text-gray-400">
           Even smaller muted text
         </p>
+
+        <div className="ut-grid-3-col">
+          <p className="text-16 text-white/95">text-16</p>
+          <p className="text-20">text-20</p>
+          <p className="text-16/20">text-16/20</p>
+        </div>
       </section>
 
       {/* 2. Colors — try background colors with matching text colors and different shades */}
