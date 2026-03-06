@@ -14,6 +14,8 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-fira: var(--font-fira-code);
+  --font-weight-700: 700;
 
   --text-16: 1rem;
   --text-16--line-height: 1.5;

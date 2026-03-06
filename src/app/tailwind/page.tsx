@@ -3,18 +3,19 @@
 
 export default function Tailwind() {
   return (
-    <main>
+    <main className="font-fira">
       {/* 1. Typography — play with size, weight, line height, letter spacing */}
       <section className="p-2 flex flex-col gap-2">
-        <h1 className="text-4xl uppercase font-bold text-green-600">
+        <h1 className="text-4xl uppercase font-fira font-700 text-green-600">
           Big heading
         </h1>
-        <p className="text-lg font-light leading-tight line-clamp-2">
+
+        <p className="text-lg font-light leading-tight line-clamp-2 font-sans">
           Smaller paragraph with lighter weight and relaxed line height. Smaller
           paragraph with lighter weight and relaxed line height. Smaller
           paragraph with lighter weight and relaxed line height.
         </p>
-        <p className="text-sm italic tracking-wider text-gray-400">
+        <p className="text-sm italic tracking-wider text-gray-400 font-mono">
           Even smaller muted text
         </p>
 
