@@ -15,6 +15,7 @@ export default function Tailwind() {
           paragraph with lighter weight and relaxed line height. Smaller
           paragraph with lighter weight and relaxed line height.
         </p>
+
         <p className="text-sm italic tracking-wider text-gray-400 font-mono">
           Even smaller muted text
         </p>
@@ -29,6 +30,7 @@ export default function Tailwind() {
       {/* 2. Colors — try background colors with matching text colors and different shades */}
       <section className="p-2">
         <h2 className="font-bold text-green-400 text-2xl">Colors</h2>
+
         <div className="flex gap-3">
           <span className="p-2 rounded-2xl bg-blue-400">blue-500</span>
           <span className="p-2 rounded-2xl bg-blue-200">blue-200</span>
@@ -41,6 +43,7 @@ export default function Tailwind() {
       {/* 3. Spacing & layout — use flex, gap, padding, width, height */}
       <section className="p-2">
         <h2 className="font-bold text-2xl text-green-400">Spacing & layout</h2>
+
         <div className="flex justify-around gap-3">
           <div className="border-2 p-1 self-end">small padding</div>
           <div className="border-2 p-4 h-32">medium padding</div>
