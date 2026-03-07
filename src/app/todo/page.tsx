@@ -1,9 +1,9 @@
 "use client";
-import { startTransition, useEffect, useState } from "react";
+import { api } from "@/api";
 import { tTodo } from "@/api/todo.types";
 import { TodoForm } from "@/components/todo/TodoForm";
 import { TodoList } from "@/components/todo/TodoList";
-import { api } from "@/api";
+import { startTransition, useEffect, useState } from "react";
 
 export default function Todo() {
   const [todos, setTodos] = useState<tTodo[] | null>();

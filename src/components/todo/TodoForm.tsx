@@ -1,5 +1,6 @@
 import { tTodo } from "@/api/todo.types";
 import { useState } from "react";
+import { Button } from "../ui/Button/Button";
 
 type tProps = {
   updateTodoList: (todo: tTodo) => void;
@@ -43,7 +44,7 @@ export const TodoForm = ({ updateTodoList }: tProps) => {
         value={todo?.description || ""}
         onChange={onChangeTodo}
       />
-      <button type="submit">Add todo</button>
+      <Button type="submit">Add todo</Button>
     </form>
   );
 };
