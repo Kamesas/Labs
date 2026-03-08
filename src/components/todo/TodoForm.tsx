@@ -1,6 +1,7 @@
 import { tTodo } from "@/api/todo.types";
 import { useState } from "react";
 import { Button } from "../ui/Button/Button";
+import { Input } from "../ui/Input/Input";
 
 type tProps = {
   updateTodoList: (todo: tTodo) => void;
@@ -37,10 +38,9 @@ export const TodoForm = ({ updateTodoList }: tProps) => {
 
   return (
     <form onSubmit={addNewTodo}>
-      <input
+      <Input
         name="todo-description"
         placeholder="Write todo"
-        className="text-green-600 border-green-600 border-2"
         value={todo?.description || ""}
         onChange={onChangeTodo}
       />
