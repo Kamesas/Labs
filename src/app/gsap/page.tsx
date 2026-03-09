@@ -2,11 +2,11 @@
 
 import gsap from "gsap";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { slides } from "./slides";
-import { CircleContainer } from "./CircleContainer";
-import { ControlsContainer } from "./ControlsContainer";
-import { ImageContainer } from "./ImageContainer";
-import { QuoteContainer } from "./QuoteContainer";
+import { CircleContainer } from "./Carousel/CircleContainer";
+import { ControlsContainer } from "./Carousel/ControlsContainer";
+import { ImageContainer } from "./Carousel/ImageContainer";
+import { QuoteContainer } from "./Carousel/QuoteContainer";
+import { slides } from "./Carousel/slides";
 
 const DURATION = 0.6;
 const PROGRESS_DURATION = 6;
