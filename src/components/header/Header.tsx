@@ -3,12 +3,13 @@ import { NavItem } from "./NavItem";
 
 // with the nav link 13.5kB
 // without the nav link 13.2kB
-
+//
 export const Header = () => {
   const pages = {
     todo: { path: "/todo", title: "Todo" },
-    tailwind: { path: "/tailwind", title: "Tailwind" },
-    grid: { path: "/grid", title: "CSS grid" },
+    taiwind: { path: "/tailwind", title: "Tailwind" },
+    grid: { path: "/grid", title: "Css grid" },
+    gsap: { path: "/gsap", title: "GSAP" },
   } as const;
 
   return (
@@ -19,10 +20,12 @@ export const Header = () => {
 
       <nav>
         <ul className="flex gap-4">
-          {Object.entries(pages).map((page) => {
-            const [key, value] = page;
+          {Object.keys(pages).map((page) => {
+            const currPage = pages[page as keyof typeof pages];
 
-            return <NavItem key={key} title={value.title} url={value.path} />;
+            return (
+              <NavItem key={page} title={currPage.title} url={currPage.path} />
+            );
           })}
         </ul>
       </nav>

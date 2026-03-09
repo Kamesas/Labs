@@ -25,6 +25,26 @@
 
   --text-20: 1.25rem;
   --text-20--line-height: 1.5;
+
+  /* todo — backgrounds */
+  --color-td-navy: #05243e;
+  --color-td-primary: #0ea5e9;
+  --color-td-card: rgba(255, 255, 255, 0.97);
+  --color-td-input-bg: rgba(16, 45, 83, 0.8);
+  --color-td-field-bg: #05243e;
+  --color-td-surface: #ffffff;
+
+  /* todo — gradient */
+  --color-td-grad-from: #1253aa;
+  --color-td-grad-to: #05243e;
+
+  /* todo — text */
+  --color-td-text-primary: #ffffff;
+  --color-td-text-muted: rgba(255, 255, 255, 0.6);
+  --color-td-text-field: rgba(255, 255, 255, 0.8);
+  --color-td-text-dark: #05243e;
+  --color-td-text-card-title: #000000;
+  --color-td-text-card-sub: rgba(0, 0, 0, 0.9);
 }
 
 @media (prefers-color-scheme: dark) {
