@@ -14,24 +14,30 @@ export const CircleContainer = ({
   slidesLength,
 }: tProps) => {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-      <svg width="40" height="40" viewBox="0 0 40 40">
+    <div className="flex items-center gap-2">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
         <circle
-          cx="20"
-          cy="20"
-          r="18"
-          fill="none"
-          stroke="rgba(255,255,255,0.2)"
-          strokeWidth="2"
+          opacity="0.2"
+          cx="12"
+          cy="12"
+          r="10.5"
+          stroke="#F8F6F2"
+          strokeWidth="3"
         />
         <circle
           ref={progressRef}
-          cx="20"
-          cy="20"
-          r="18"
+          cx="12"
+          cy="12"
+          r="10.5"
           fill="none"
-          stroke="#fff"
-          strokeWidth="2"
+          stroke="#F8F6F2"
+          strokeWidth="3"
           strokeDasharray={circumference}
           strokeDashoffset={circumference}
           strokeLinecap="round"
@@ -42,7 +48,7 @@ export const CircleContainer = ({
         />
       </svg>
 
-      <span style={{ fontSize: "0.875rem" }}>
+      <span>
         {currentSlide + 1} / {slidesLength}
       </span>
     </div>
