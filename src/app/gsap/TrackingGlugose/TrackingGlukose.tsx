@@ -1,7 +1,7 @@
 "use client";
 
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SlideCard } from "./SlideCard";
 import { CARD_GAP, CARD_STEP, slides } from "./slides";
 
@@ -76,6 +76,21 @@ export const TrackingGlukose = () => {
       setActiveIndex(index);
     }
   };
+
+  useEffect(() => {
+    const el = cardsRef.current;
+    if (!el) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      if (e.deltaY > 0 && activeIndex < slides.length - 1)
+        goTo(activeIndex + 1);
+      else if (e.deltaY < 0 && activeIndex > 0) goTo(activeIndex - 1);
+    };
+
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, [activeIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="flex flex-col gap-[105px] bg-surface-light px-10 py-20 max-w-[1440px] mx-auto">
