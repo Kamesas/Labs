@@ -37,7 +37,7 @@ export const CircleContainer = ({
   }, [currentSlide]);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-4">
       <svg
         width="24"
         height="24"

@@ -44,12 +44,12 @@ export const Carousel = () => {
       ref={containerRef}
       className="bg-surface-dark px-4 py-12 lg:px-12 lg:py-0 lg:min-h-[800px] flex flex-col justify-center max-w-[1440px] mx-auto"
     >
-      <div className="flex flex-col items-center gap-8 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
+      <div className="flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
         <QuoteContainer slide={slide} />
         <ImageContainer slide={slide} />
       </div>
 
-      <div className="flex justify-between items-center mt-6 lg:mt-10">
+      <div className="flex justify-between items-center mt-6 lg:mt-7">
         <CircleContainer
           currentSlide={current}
           slidesLength={slides.length}

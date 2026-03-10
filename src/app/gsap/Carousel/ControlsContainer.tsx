@@ -33,7 +33,7 @@ const ArrowIcon = ({ direction }: { direction: "prev" | "next" }) => {
 
 export const ControlsContainer = ({ goTo }: tProps) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-3">
       <button
         onClick={() => goTo("prev")}
         className="flex items-center justify-center cursor-pointer opacity-20 hover:opacity-100 transition-opacity"
