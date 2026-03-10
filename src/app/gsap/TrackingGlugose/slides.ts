@@ -1,3 +1,7 @@
+export const CARD_HEIGHT = 570;
+export const CARD_GAP = 24;
+export const CARD_STEP = CARD_HEIGHT + CARD_GAP;
+
 export type tTrackingSlide = {
   number: string;
   title: string;
