@@ -9,7 +9,7 @@ const ArrowIcon = ({ direction }: { direction: "prev" | "next" }) => {
       height="48"
       viewBox="0 0 48 48"
       fill="none"
-      className={isNext ? "" : "rotate-180"}
+      className={`w-10 h-10 lg:w-12 lg:h-12 ${isNext ? "" : "rotate-180"}`}
       aria-hidden="true"
     >
       <rect width="48" height="48" rx="24" className="fill-surface-light" />
@@ -36,14 +36,14 @@ export const ControlsContainer = ({ goTo }: tProps) => {
     <div className="flex gap-2">
       <button
         onClick={() => goTo("prev")}
-        className="w-12 h-12 flex items-center justify-center cursor-pointer opacity-20 hover:opacity-100 transition-opacity"
+        className="flex items-center justify-center cursor-pointer opacity-20 hover:opacity-100 transition-opacity"
       >
         <ArrowIcon direction="prev" />
       </button>
 
       <button
         onClick={() => goTo("next")}
-        className="w-12 h-12 flex items-center justify-center cursor-pointer opacity-20 hover:opacity-100 transition-opacity"
+        className="flex items-center justify-center cursor-pointer opacity-20 hover:opacity-100 transition-opacity"
       >
         <ArrowIcon direction="next" />
       </button>
