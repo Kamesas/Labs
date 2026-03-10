@@ -1,7 +1,6 @@
 export type tTrackingSlide = {
   number: string;
   title: string;
-  subtitle: string;
   description: string;
   image: string;
 };
@@ -9,35 +8,30 @@ export type tTrackingSlide = {
 export const slides: Array<tTrackingSlide> = [
   {
     number: "01",
-    title: "Sleep",
-    subtitle: "Glucose and sleep influence each other",
+    title: "Sleep more soundly",
     description:
-      "Disrupted sleep makes glucose harder to manage. Tracking helps you see how sleep quality affects your feelings and functioning. Read more about sleep here.",
+      "Stable glucose supports better sleep, and better sleep helps regulate glucose the next day. When sleep is disrupted, glucose can become harder to manage.",
     image: "/images/tracking-glucose/sleep-bg.png",
   },
   {
     number: "02",
-    title: "Nutrition",
-    subtitle:
-      "What you eat\u2014and when you eat\u2014shapes your glucose response.",
+    title: "Personalize your nutrition",
     description:
-      "Tracking glucose shows how specific food, portion, and meal timing affects your energy, improving glucose stability over time. Read more about nutrition here.",
+      "Tracking glucose shows how specific food, portion, and meal timing affects your energy, improving glucose stability over time.",
     image: "/images/tracking-glucose/nutrition-bg.png",
   },
   {
     number: "03",
-    title: "Exercise",
-    subtitle: "Daily movement helps your body use glucose more efficiently.",
+    title: "Tailor your movement",
     description:
-      "Physical activity is key to how your body processes glucose. Tracking daily movement helps you monitor changes over time. Read more about exercise here.",
+      "Physical activity is key to how your body processes glucose. Tracking daily movement helps you monitor changes over time.",
     image: "/images/tracking-glucose/exercise-bg.png",
   },
   {
     number: "04",
-    title: "Stress",
-    subtitle: "Stress can raise glucose\u2014even without food.",
+    title: "Manage stress",
     description:
-      "High stress releases hormones that raise glucose levels. Tracking glucose can help you improve overall recovery and balance. Read more about stress here.",
+      "High stress releases hormones that raise glucose levels. Tracking glucose can help you improve overall recovery and balance.",
     image: "/images/tracking-glucose/stress-bg.png",
   },
 ];
