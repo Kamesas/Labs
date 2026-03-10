@@ -50,7 +50,7 @@ export const CircleContainer = ({
           cx="12"
           cy="12"
           r="10.5"
-          stroke="#F8F6F2"
+          className="stroke-surface-light"
           strokeWidth="3"
         />
         <circle
@@ -59,7 +59,7 @@ export const CircleContainer = ({
           cy="12"
           r="10.5"
           fill="none"
-          stroke="#F8F6F2"
+          className="stroke-surface-light"
           strokeWidth="3"
           strokeDasharray={circumference}
           strokeDashoffset={circumference}
@@ -71,7 +71,7 @@ export const CircleContainer = ({
         />
       </svg>
 
-      <span className="text-[#F8F6F2] font-[GT_America_Trial] text-[16px] font-normal leading-[140%] tracking-[-0.16px]">
+      <span className="text-surface-light font-[GT_America_Trial] text-[16px] font-normal leading-[1.4em] tracking-[-1%]">
         {currentSlide + 1} / {slidesLength}
       </span>
     </div>

@@ -48,9 +48,14 @@
   --color-active-black: #000000;
 
   /* Accent */
-  --color-accent-coral: #d86150;
-  --color-accent-tangerine: #ffab7b;
-  --color-accent-lavender: #cac7f0;
+  --color-accent-coral: #D86150;
+  --color-accent-tangerine: #FFAB7B;
+  --color-accent-lavender: #CAC7F0;
+  --color-accent-gold: #F0B377;
+
+  /* Surface */
+  --color-surface-dark: #291928;
+  --color-surface-light: #F8F6F2;
 
   /* Notification */
   --color-notification-error: #ac3d2e;

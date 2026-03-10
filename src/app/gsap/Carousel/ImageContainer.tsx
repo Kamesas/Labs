@@ -5,13 +5,14 @@ type tProps = { slide: tSlide };
 
 export const ImageContainer = ({ slide }: tProps) => {
   return (
-    <Image
-      data-img
-      src={slide.image}
-      alt={slide.name}
-      width={665}
-      height={532}
-      className="rounded-lg object-cover"
-    />
+    <div className="relative w-full aspect-[665/532]">
+      <Image
+        data-img
+        src={slide.image}
+        alt={slide.name}
+        fill
+        className="rounded-lg object-cover"
+      />
+    </div>
   );
 };

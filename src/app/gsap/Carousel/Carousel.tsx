@@ -42,7 +42,7 @@ export const Carousel = () => {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col justify-center m-auto max-w-[1343px] bg-[#291928] min-h-[800px]"
+      className="flex flex-col justify-center m-auto max-w-[1343px] bg-surface-dark min-h-[800px]"
     >
       <div className="grid grid-cols-2 gap-12 items-center">
         <QuoteContainer slide={slide} />
