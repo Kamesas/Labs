@@ -8,14 +8,16 @@ import { CARD_GAP, CARD_STEP, slides } from "./slides";
 export const TrackingGlukose = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isAnimating = useRef(false);
-  const bgRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const bgRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const goTo = (index: number) => {
     if (index === activeIndex || isAnimating.current) return;
     isAnimating.current = true;
+
+    const bgs = bgRef.current?.children;
+    const cards = cardsRef.current?.children;
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -23,16 +25,14 @@ export const TrackingGlukose = () => {
       },
     });
 
-    tl.to(
-      bgRefs.current[activeIndex],
-      { opacity: 0, duration: 0.6, ease: "power2.inOut" },
-      0,
-    );
-    tl.to(
-      bgRefs.current[index],
-      { opacity: 1, duration: 0.6, ease: "power2.inOut" },
-      0,
-    );
+    if (bgs) {
+      tl.to(
+        bgs[activeIndex],
+        { opacity: 0.01, duration: 0.6, ease: "power2.inOut" },
+        0,
+      );
+      tl.to(bgs[index], { opacity: 1, duration: 0.6, ease: "power2.inOut" }, 0);
+    }
 
     tl.to(
       cardsRef.current,
@@ -40,22 +40,26 @@ export const TrackingGlukose = () => {
       0,
     );
 
-    tl.to(
-      cardRefs.current[activeIndex],
-      {
-        duration: 0.4,
-        ease: "power2.inOut",
-      },
-      0,
-    );
-    tl.to(
-      cardRefs.current[index],
-      {
-        duration: 0.4,
-        ease: "power2.inOut",
-      },
-      0,
-    );
+    if (cards) {
+      tl.to(
+        cards[activeIndex],
+        {
+          backgroundColor: "rgba(0,0,0,0.2)",
+          duration: 0.4,
+          ease: "power2.inOut",
+        },
+        0,
+      );
+      tl.to(
+        cards[index],
+        {
+          backgroundColor: "rgba(0,0,0,0.1)",
+          duration: 0.4,
+          ease: "power2.inOut",
+        },
+        0,
+      );
+    }
 
     if (counterRef.current) {
       tl.to(
@@ -81,19 +85,18 @@ export const TrackingGlukose = () => {
       </h2>
 
       <div className="relative w-full max-w-[1360px] mx-auto aspect-1360/989 rounded-3xl overflow-hidden">
-        {slides.map((slide, i) => (
-          <div
-            key={slide.number}
-            ref={(el) => {
-              bgRefs.current[i] = el;
-            }}
-            className="absolute inset-0 scale-110 bg-cover bg-center blur-md"
-            style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 100%), url(${slide.image})`,
-              opacity: i === 0 ? 1 : 0,
-            }}
-          />
-        ))}
+        <div ref={bgRef} className="absolute inset-0">
+          {slides.map((slide, i) => (
+            <div
+              key={slide.number}
+              className="absolute inset-0 scale-110 bg-cover bg-center blur-md"
+              style={{
+                backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 100%), url(${slide.image})`,
+                opacity: i === 0 ? 1 : 0.01,
+              }}
+            />
+          ))}
+        </div>
 
         <div className="absolute left-[2.28%] top-[4.04%] flex items-center px-8 py-4 rounded-full bg-black/20 backdrop-blur-[7px]">
           <span
@@ -113,9 +116,6 @@ export const TrackingGlukose = () => {
           {slides.map((slide, i) => (
             <SlideCard
               key={slide.number}
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
               slide={slide}
               active={i === 0}
               onClick={() => goTo(i)}

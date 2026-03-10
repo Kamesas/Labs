@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { forwardRef } from "react";
 import { CARD_HEIGHT, tTrackingSlide } from "./slides";
 
 type SlideCardProps = {
@@ -8,12 +7,10 @@ type SlideCardProps = {
   onClick: () => void;
 };
 
-export const SlideCard = forwardRef<HTMLDivElement, SlideCardProps>(
-  ({ slide, active = false, onClick }, ref) => {
-    return (
-      <div
-        ref={ref}
-        onClick={onClick}
+export const SlideCard = ({ slide, active = false, onClick }: SlideCardProps) => {
+  return (
+    <div
+      onClick={onClick}
         className="
           grid grid-rows-[282px_1fr] justify-items-center gap-8 p-4
           w-[410px]
@@ -48,8 +45,5 @@ export const SlideCard = forwardRef<HTMLDivElement, SlideCardProps>(
           </span>
         </div>
       </div>
-    );
-  },
-);
-
-SlideCard.displayName = "SlideCard";
+  );
+};
