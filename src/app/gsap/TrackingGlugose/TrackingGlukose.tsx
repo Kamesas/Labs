@@ -1,19 +1,26 @@
 "use client";
 
 import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { SlideCard } from "./SlideCard";
 import { CARD_GAP, CARD_STEP, slides } from "./slides";
 
 export const TrackingGlukose = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isAnimating = useRef(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
 
   const goTo = (index: number) => {
-    if (index === activeIndex || isAnimating.current) return;
+    if (
+      index < 0 ||
+      index >= slides.length ||
+      index === activeIndex ||
+      isAnimating.current
+    )
+      return;
     isAnimating.current = true;
 
     const bgs = bgRef.current?.children;
@@ -77,23 +84,57 @@ export const TrackingGlukose = () => {
     }
   };
 
+  const onWheel = useEffectEvent((deltaY: number) => {
+    if (deltaY > 0) goTo(activeIndex + 1);
+    else if (deltaY < 0) goTo(activeIndex - 1);
+  });
+
+  const onAutoplay = useEffectEvent(() => {
+    goTo((activeIndex + 1) % slides.length);
+  });
+
   useEffect(() => {
     const el = cardsRef.current;
     if (!el) return;
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      if (e.deltaY > 0 && activeIndex < slides.length - 1)
-        goTo(activeIndex + 1);
-      else if (e.deltaY < 0 && activeIndex > 0) goTo(activeIndex - 1);
+      onWheel(e.deltaY);
     };
 
     el.addEventListener("wheel", handleWheel, { passive: false });
     return () => el.removeEventListener("wheel", handleWheel);
-  }, [activeIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let timer: ReturnType<typeof setInterval>;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          timer = setInterval(onAutoplay, 4000);
+        } else {
+          clearInterval(timer);
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
-    <section className="flex flex-col gap-[105px] bg-surface-light px-10 py-20 max-w-[1440px] mx-auto">
+    <section
+      ref={sectionRef}
+      className="flex flex-col gap-[105px] bg-surface-light px-10 py-20 max-w-[1440px] mx-auto"
+    >
       <h2 className="font-heading text-[40px] leading-[1.3] tracking-[-0.01em] text-surface-dark max-w-[929px]">
         Tracking glucose helps you see how daily habits affect your body, making
         it easier to improve energy, sleep, and overall health.
