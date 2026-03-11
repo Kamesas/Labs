@@ -1,9 +1,12 @@
 "use client";
 
 import gsap from "gsap";
-import { useEffect, useEffectEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { SlideCard } from "./SlideCard";
+import { SlideChart } from "./SlideChart";
+import { SlideInfo } from "./SlideInfo";
 import { CARD_GAP, CARD_STEP, slides } from "./slides";
+import { useWheel } from "./useWheel";
 
 export const TrackingGlukose = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -12,6 +15,8 @@ export const TrackingGlukose = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<HTMLDivElement>(null);
 
   const goTo = (index: number) => {
     if (
@@ -25,6 +30,8 @@ export const TrackingGlukose = () => {
 
     const bgs = bgRef.current?.children;
     const cards = cardsRef.current?.children;
+    const infos = infoRef.current?.children;
+    const charts = chartRef.current?.children;
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -68,6 +75,32 @@ export const TrackingGlukose = () => {
       );
     }
 
+    if (infos) {
+      tl.to(
+        infos[activeIndex],
+        { opacity: 0, duration: 0.4, ease: "power2.inOut" },
+        0,
+      );
+      tl.to(
+        infos[index],
+        { opacity: 1, duration: 0.4, ease: "power2.inOut" },
+        0.2,
+      );
+    }
+
+    if (charts) {
+      tl.to(
+        charts[activeIndex],
+        { opacity: 0, duration: 0.4, ease: "power2.inOut" },
+        0,
+      );
+      tl.to(
+        charts[index],
+        { opacity: 1, duration: 0.4, ease: "power2.inOut" },
+        0.2,
+      );
+    }
+
     if (counterRef.current) {
       tl.to(
         counterRef.current,
@@ -84,56 +117,21 @@ export const TrackingGlukose = () => {
     }
   };
 
-  const onWheel = useEffectEvent((deltaY: number) => {
-    if (deltaY > 0) goTo(activeIndex + 1);
-    else if (deltaY < 0) goTo(activeIndex - 1);
+  useWheel({
+    target: cardsRef,
+    onDown: () => goTo(activeIndex + 1),
+    onUp: () => goTo(activeIndex - 1),
   });
 
-  const onAutoplay = useEffectEvent(() => {
-    goTo((activeIndex + 1) % slides.length);
-  });
-
-  useEffect(() => {
-    const el = cardsRef.current;
-    if (!el) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      onWheel(e.deltaY);
-    };
-
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    return () => el.removeEventListener("wheel", handleWheel);
-  }, []);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    let timer: ReturnType<typeof setInterval>;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          timer = setInterval(onAutoplay, 4000);
-        } else {
-          clearInterval(timer);
-        }
-      },
-      { threshold: 0.4 },
-    );
-
-    observer.observe(section);
-    return () => {
-      observer.disconnect();
-      clearInterval(timer);
-    };
-  }, []);
+  // useAutoplay({
+  //   target: sectionRef,
+  //   onTick: () => goTo((activeIndex + 1) % slides.length),
+  // });
 
   return (
     <section
       ref={sectionRef}
-      className="flex flex-col gap-[105px] bg-surface-light px-10 py-20 max-w-[1440px] mx-auto"
+      className="flex flex-col gap-[105px] bg-surface-light px-2 py-20 max-w-[1440px] mx-auto"
     >
       <h2 className="font-heading text-[40px] leading-[1.3] tracking-[-0.01em] text-surface-dark max-w-[929px]">
         Tracking glucose helps you see how daily habits affect your body, making
@@ -154,7 +152,7 @@ export const TrackingGlukose = () => {
           ))}
         </div>
 
-        <div className="absolute left-[2.28%] top-[4.04%] flex items-center px-8 py-4 rounded-full bg-black/20 backdrop-blur-[7px]">
+        <div className="absolute left-[2.3%] top-[4%] flex items-center px-8 py-4 rounded-full bg-black/20 backdrop-blur-[7px]">
           <span
             ref={counterRef}
             className="font-heading text-sm leading-tight text-white"
@@ -164,19 +162,47 @@ export const TrackingGlukose = () => {
           </span>
         </div>
 
-        <div
-          ref={cardsRef}
-          className="absolute left-1/2 top-[18.71%] -translate-x-1/2 flex flex-col"
-          style={{ gap: CARD_GAP }}
-        >
-          {slides.map((slide, i) => (
-            <SlideCard
-              key={slide.number}
-              slide={slide}
-              active={i === 0}
-              onClick={() => goTo(i)}
-            />
-          ))}
+        <div className="relative h-full grid grid-cols-[1fr_auto_1fr] items-center gap-[62px] px-[16px]">
+          <div ref={infoRef} className="grid justify-self-end">
+            {slides.map((slide, i) => (
+              <div
+                key={slide.number}
+                className="col-start-1 row-start-1"
+                style={{ opacity: i === 0 ? 1 : 0 }}
+              >
+                <SlideInfo metric={slide.metric} />
+              </div>
+            ))}
+          </div>
+
+          <div className="h-[570px]">
+            <div
+              ref={cardsRef}
+              className="flex flex-col"
+              style={{ gap: CARD_GAP }}
+            >
+              {slides.map((slide, i) => (
+                <SlideCard
+                  key={slide.number}
+                  slide={slide}
+                  active={i === 0}
+                  onClick={() => goTo(i)}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div ref={chartRef} className="grid justify-self-start">
+            {slides.map((slide, i) => (
+              <div
+                key={slide.number}
+                className="col-start-1 row-start-1"
+                style={{ opacity: i === 0 ? 1 : 0 }}
+              >
+                <SlideChart src={slide.chart} alt={`${slide.title} chart`} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
