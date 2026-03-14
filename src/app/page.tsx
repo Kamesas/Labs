@@ -4,7 +4,7 @@ export default function Home() {
       <h6>yup</h6>
       <h1 className="from-main-branch">From main branch yup</h1>
       <h1 className="from-main-branch">From main branch 2 yup</h1>
-      <h3 className="h3">Heading 3</h3>
+      <h4 className="h3">Heading 3</h4>
     </div>
   );
 }
