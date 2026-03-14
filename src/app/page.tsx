@@ -1,7 +1,9 @@
 export default function Home() {
   return (
-    <main>
-      <h1>Home page</h1>{" "}
-    </main>
+    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <h1 className="from-main-branch">From main branch</h1>
+
+      <h1 className="from-main-branch">From main branch 2</h1>
+    </div>
   );
 }
