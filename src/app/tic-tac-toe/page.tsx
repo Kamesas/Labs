@@ -4,14 +4,13 @@ import { useState } from "react";
 import { TTTGrid } from "./TTTGrid";
 import { checkResult, getInitState } from "./helpers";
 import { tPlayer, tTile } from "./types";
+import { ChoosePlayer } from "./ChoosePlayer";
+import { Winner } from "./Winner";
 
 export default function TicTacToe() {
   const [player, setPlayer] = useState<tPlayer>(null);
   const [winner, setWinner] = useState<tPlayer>(null);
   const [tiles, setTiles] = useState<Array<tTile>>(getInitState());
-
-  console.log("tiles --->:", tiles);
-  console.log("player --->:", player);
 
   const onChangePlayer = (player: tPlayer) => {
     setPlayer(player);
@@ -47,21 +46,9 @@ export default function TicTacToe() {
   return (
     <div>
       <h1>TTT game</h1>
-      {!player && (
-        <div>
-          <div>Choose the player </div>
-          <div onClick={() => onChangePlayer("x")}>x</div> or{" "}
-          <div onClick={() => onChangePlayer("o")}>o</div>
-        </div>
-      )}
+      {!player && <ChoosePlayer onChangePlayer={onChangePlayer} />}
 
-      {winner && (
-        <div>
-          <h1>Winner is: {winner}</h1>
-
-          <button onClick={onReset}>Reset the game</button>
-        </div>
-      )}
+      {winner && <Winner onReset={onReset} winner={winner} />}
 
       {!!player && (
         <div>
