@@ -32,7 +32,7 @@ export const ChoosePlayer = ({ onChangePlayer }: tProps) => {
   return (
     <div
       ref={sectionRef}
-      className="shadow-accent-coral border max-w-[320px] rounded-2xl m-auto"
+      className="shadow-accent-coral flex flex-col gap-3 border max-w-[320px] rounded-2xl m-auto"
     >
       <div className="text-3xl text-orange-400 text-center">
         Choose the player{" "}
