@@ -6,6 +6,7 @@ import { checkResult, getInitState } from "./helpers";
 import { tPlayer, tTile } from "./types";
 import { ChoosePlayer } from "./ChoosePlayer";
 import { Winner } from "./Winner";
+import { GameScreen } from "./GameScreen";
 
 export default function TicTacToe() {
   const [player, setPlayer] = useState<tPlayer>(null);
@@ -45,19 +46,16 @@ export default function TicTacToe() {
 
   return (
     <div>
-      <h1>TTT game</h1>
+      <h1 className="uppercase text-center text-5xl mb-5">Tic-Tac-Toe game</h1>
+
       {!player && <ChoosePlayer onChangePlayer={onChangePlayer} />}
 
       {winner && <Winner onReset={onReset} winner={winner} />}
 
       {!!player && (
-        <div>
-          <h2 className="text-orange-400 py-1.5">
-            Current player is:{" "}
-            <span className="uppercase font-bold">{player}</span>
-          </h2>
+        <GameScreen onReset={onReset} player={player}>
           <TTTGrid tiles={tiles} onMarkCallback={onMark} />
-        </div>
+        </GameScreen>
       )}
     </div>
   );
