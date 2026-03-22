@@ -10,6 +10,7 @@ export const Header = () => {
     taiwind: { path: "/tailwind", title: "Tailwind" },
     grid: { path: "/grid", title: "Css grid" },
     gsap: { path: "/gsap", title: "GSAP" },
+    ttt: { path: "/tic-tac-toe", title: "TTT" },
   } as const;
 
   return (
